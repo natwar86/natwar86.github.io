@@ -1,5 +1,5 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://natwar86.github.io',
+  site: 'https://natwar.com',
 });
