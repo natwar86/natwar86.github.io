@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('writing')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+---
+<Base>
+
+<h1>Natwar</h1>
+
+<p>I build data products. The current one is
+<a href="https://conferencegrid.com">ConferenceGrid</a>, a conference database
+for B2B teams. It reads six thousand conference sites and links the speakers,
+sponsors, and exhibitors into one graph, so you can look up a company and see
+every event it touches.</p>
+
+<p>If you want to build something together,
+<a href="mailto:natwar86@gmail.com">email me</a>.</p>
+
+<h2>Projects</h2>
+<ul>
+  <li><a href="https://conferencegrid.com">ConferenceGrid</a>. Type a company,
+  see every conference it sponsors, speaks at, or exhibits at. 6,000+
+  conferences, 84,000 speakers, one graph.</li>
+  <li><a href="https://github.com/natwar86/signal-listener">Signal Listener</a>.
+  Watches reviews, Reddit, and other public feeds for sales signals. Built for
+  Saltbox.</li>
+</ul>
+
+{posts.length > 0 && (
+  <>
+    <h2>Writing</h2>
+    <ul>
+      {posts.map((post) => (
+        <li>
+          <a href={`/writing/${post.id}/`}>{post.data.title}</a><br />
+          <span class="date">{fmt(post.data.date)}</span>
+        </li>
+      ))}
+    </ul>
+  </>
+)}
+
+<footer>
+  <p>
+    <a href="https://github.com/natwar86">github</a> ·
+    <a href="#">linkedin</a> ·
+    <a href="#">x</a> ·
+    <a href="mailto:natwar86@gmail.com">email</a>
+  </p>
+</footer>
+
+</Base>

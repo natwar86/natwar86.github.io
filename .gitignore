@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+
+# local design iterations, not part of the site
+samples/
+samples-v2/
+samples-v3/
+samples-v4/
+samples-v5/
+
+# local session state
+.claude/
