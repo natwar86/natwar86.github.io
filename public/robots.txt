@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://natwar.com/sitemap-index.xml
