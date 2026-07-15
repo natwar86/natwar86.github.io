@@ -15,8 +15,7 @@ const {
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="sitemap" href="/sitemap-index.xml" />
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#1b1a18" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#ffffff" id="meta-theme" />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:type" content="website" />
@@ -55,16 +54,6 @@ const {
     --soft: #666;
     --underline: #999;
     --code-bg: #f6f6f4;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #1b1a18;
-      --ink: #d8d5ce;
-      --gray: #918d85;
-      --soft: #918d85;
-      --underline: #6f6c66;
-      --code-bg: #262420;
-    }
   }
   :root[data-theme="dark"] {
     --bg: #1b1a18;
@@ -132,12 +121,12 @@ const {
   (function () {
     var btn = document.getElementById('theme-toggle');
     function current() {
-      var set = document.documentElement.dataset.theme;
-      if (set) return set;
-      return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
     }
     function paint() {
-      btn.textContent = current() === 'dark' ? '☀︎' : '☾';
+      var dark = current() === 'dark';
+      btn.textContent = dark ? '☀︎' : '☾';
+      document.getElementById('meta-theme').content = dark ? '#1b1a18' : '#ffffff';
     }
     btn.addEventListener('click', function () {
       var next = current() === 'dark' ? 'light' : 'dark';
