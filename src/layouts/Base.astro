@@ -51,12 +51,19 @@ const personSchema = {
     }
   })();
 </script>
-<script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-NQVV4L0M4M"></script>
 <script is:inline>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-NQVV4L0M4M');
+  (function(){
+    // Do not load analytics in automated browsers (headless crawlers inflate sessions).
+    var n = navigator, ua = n.userAgent || '';
+    if (n.webdriver === true || /HeadlessChrome|Lighthouse|PhantomJS|Puppeteer|Playwright/i.test(ua)) return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function(){ dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', 'G-NQVV4L0M4M');
+    var s = document.createElement('script'); s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-NQVV4L0M4M';
+    document.head.appendChild(s);
+  })();
 </script>
 </head>
 <body>
